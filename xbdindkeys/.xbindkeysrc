@@ -1,0 +1,4 @@
+"/usr/bin/xte 'keydown Control_L' &"
+b:13
+"/usr/bin/xte 'keyup Control_L' &"
+Control + b:13

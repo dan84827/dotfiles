@@ -1,9 +1,12 @@
 "			G E N E R A L
+"remap some of the annoying save and quit mistakes
+"still need to figure this out
+
 "automatic reloading of .vimrc...works?
 autocmd! bufwritepost .vimrc source %
 
 " spell checker mapped to F6
-map <F6> :setlocal spell! spelllang=en_us<CR>
+map <F12> :setlocal spell! spelllang=en_us<CR>
 
 "copy and pasting 
 set clipboard=unnamedplus
@@ -21,7 +24,11 @@ set ignorecase
 set smartcase
 
 "set autoindentation
-set ai
+set autoindent
+
+"make a line underneath the cursor
+set cursorline
+hi Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 
 "turn syntax on?
 syntax on
@@ -46,6 +53,9 @@ set ws
 
 "turn on relative numbers
 "set relativenumber
+
+"	GUI SETTINGS
+"	coming soon
 
 "Configuring vim to map the escape sequences to their Alt
 "combinations Alt-letter will now be recognised by vi in a terminal. 
@@ -76,6 +86,7 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 "			V I M  -  L A T E X
 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+" Also required for vim instant markdown plugin
 filetype plugin on
 
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
@@ -102,17 +113,25 @@ let g:tex_flavor='latex'
 "set background=dark
 "colorscheme solarized
 
-"			S Y N T A S T I C
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+""			S Y N T A S T I C
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 "		P Y T H O N
 "make python look pretty
 let python_highlight_all=1
 syntax on
+
+"Make calcurse notes markdown compatible:
+autocmd BufRead,BufNewFile /tmp/calcurse* set filetype=markdown
+autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
+
+" tell vim instant markdown not to open firfox tab automatically
+" manually turn on with :InstantMarkdownPreview
+let g:instant_markdown_autostart = 0
