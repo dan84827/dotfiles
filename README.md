@@ -17,7 +17,7 @@ I think that the custom plugins I added are as follows:
 ### _Plugins:_
 - tabbed
 - clipboard
-- keybaord select
+- keyboard select
 - resize-font
 
 # vim
@@ -41,7 +41,7 @@ My PDF reader of choice. It's amazing.
 I think you can configure it to have tabs with a version called zathura-tabbed.
 
 # zsh
-My shell of choice.
+My ternminal emulator of choice.
 
 ### _Plugins:_
 - Oh-My-ZSH 
