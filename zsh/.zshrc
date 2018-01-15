@@ -1,11 +1,18 @@
+#    	               __  
+#    	   ____  _____/ /_ 
+#    	  /_  / / ___/ __ \
+#    	   / /_(__  ) / / /
+#    	  /___/____/_/ /_/ 
+
+
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
   export ZSH=/home/dan/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# set browser variable -- broken
+#export BROWSER=firefox
+
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -17,11 +24,6 @@ ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -63,19 +65,17 @@ source $ZSH/oh-my-zsh.sh
 alias octave="octave --no-gui -q"
 alias clcs="calcurse"
 alias rg="ranger"
-alias ta="tmux attach"
+alias ta="tmux attach || tmux new"
 alias matlab="matlab -nosplash -nodisplay"
 
 # APT aliases
 alias acs="apt-cache search"
 alias sagi="sudo apt-get install"
 alias sagud="sudo apt-get update"
-alias sagup="sudo apt-get upgrade"
+alias sagug="sudo apt-get upgrade"
 alias sagar="sudo apt-get autoremove"
 alias sagr="sudo apt-get remove"
 
-#If no tmux session available, attach to a new one.
-#tmux attach || tmux new
 
 #setting correct TERM variable for solarized theme
 #export TERM=screen-256color-bce

@@ -1,3 +1,10 @@
+"	 _    ___         
+"	| |  / (_)___ ___ 
+"	| | / / / __ `__ \
+"	| |/ / / / / / / /
+"	|___/_/_/ /_/ /_/ 
+
+
 "			G E N E R A L
 "remap some of the annoying save and quit mistakes
 "still need to figure this out
@@ -34,9 +41,9 @@ hi Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=b
 syntax on
 
 "enable code folding
-set foldmethod=syntax
-set foldnestmax=10
-set foldlevel=2
+"set foldmethod=syntax
+"set foldnestmax=10
+"set foldlevel=2
 
 "make easy to move blocks of code. can move multiple times with single
 "selection.
