@@ -14,6 +14,11 @@
 ###---GENERAL---###
 set $mod Mod4
 
+#Needed for i3-gaps
+for_window [class="^.*"] border pixel 2
+gaps inner 0
+gaps outer 0
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:DejaVu 7
@@ -26,25 +31,47 @@ set $term urxvt
 
 #redundant--see .zshrc
 set $BROWSER firefox
+#set $BROWSER /opt/waterfox/waterfox
+
+#SYSTEMD
+set $reboot sudo reboot
+
+#mute
+set $truemute amixer -q -D pulse sset Master toggle
 
 # i3blocks config
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         tray_output primary
-	font pango:Inconsolata 10
+        font pango:Inconsolata 10
+        colors{
+            focused_workspace  #5b7f06 #1a261a #ffffff
+        }
+
 }
 
 # always load redshift on startup
-exec redshift -o
+# todo: make it so that it goes according to the time of day?
+#exec redshift -o
+
+
+#always launch dropbox on startup
+exec $term -e dropbox start
+
+#always lauch unclutter on startup
+exec --no-startup-id unclutter
 
 ##composite manager
 #exec --no-startup-id compton
+
+# change the default workspace config to stacking
+workspace_layout stacking
 
 #remove the edges to the tiles
 hide_edge_borders both
 
 #load a wallpaper on startup with feh
-exec_always feh --bg-scale /home/dan/Pictures/wallpapers/foggy_town.jpg
+exec_always feh --bg-scale /home/dan/Pictures/wallpapers/synthwave5.jpg
 
 #lauch network applet
 exec_always --no-startup-id nm-applet
@@ -52,174 +79,9 @@ exec_always --no-startup-id nm-applet
 #launch solaar on startup -- how to just keep in background?
 exec --no-startup-id solaar
 
-
-
-
-###---BASIC BINDINGS---###
-
-#Return
-#start a terminal
-bindsym $mod+Return exec $term
-#start a terminal and launch ranger
-bindsym $mod+Shift+Return exec $term -e ranger
-
-#Space
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-#delete
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+Delete exec ~/.i3/exit_menu.sh "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-#backslash(|)
-#start a terminal and attach to last tmux session 
-bindsym $mod+backslash exec $term -e tmux attach
-#start a terminal and attach to last tmux session 
-bindsym $mod+Shift+backslash exec $term -e tmux new-session
-	
-#Escape
-# making mod+shift+Escape lock i3 
-bindsym $mod+shift+Escape  exec i3lock -c "581b5e"
-
-
-#	NOT USED
-#Print
-#Scroll_Lock
-#Insert
-#Pause
-#Grave(asciitilde?)
-#semicolon
-#apostrophe
-#slash(?)
-#BackSpace
-
-
-
-
-
-###---LETTER KEY BINDINGS---###
-
-#A
-# focus the parent container
-bindsym $mod+a focus parent
-
-#B
-# bind mod+shift+b to BROWSER
-bindsym $mod+Shift+b exec $BROWSER
-
-#C
-# reload the configuration file
-#bindsym $mod+Shift+c reload
-#launch octave command line
-bindsym $mod+Shift+c exec $term -e octave --no-gui -q
-
-
-#D
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -l 100
-
-# focus the child container
-#bindsym $mod+d focus child
-
-#E
-#enable normal/split containers
-bindsym $mod+e layout toggle split
-
-#F
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-#G
-# split in horizontal orientation
-bindsym $mod+g split h
-
-#H
-# change focus
-bindsym $mod+h focus left
-# move focused window
-bindsym $mod+Shift+h move left
-
-#I
-# resize window
-bindsym $mod+i resize grow height 10 px or 10 ppt
-
-#J
-# change focus
-bindsym $mod+j focus down
-# move focused window
-bindsym $mod+Shift+j move down
-
-#K
-# change focus
-bindsym $mod+k focus up
-# move focused window
-bindsym $mod+Shift+k move up
-
-#L
-# change focus
-bindsym $mod+l focus right
-# move focused window
-bindsym $mod+Shift+l move right
-
-#M
-
-#N
-# bind mod+shift+n to nautilis file browser
-bindsym $mod+shift+n exec nautilus
-
-#O
-# resize window
-bindsym $mod+o resize grow width 10 px or 10 ppt
-#bind mod+o to shutter
-bindsym $mod+Shift+o exec shutter
-
-#P
-# bind mod+p to redshift -o (oneshot redshift)
-bindsym $mod+p exec redshift -o 
-# bind mod+shift+p to redshift -x (quit redshift)
-bindsym $mod+Shift+p exec redshift -x
-
-#Q
-# kill focused window
-bindsym $mod+q kill
-
-#R
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-#S
-# enable stacked containers
-bindsym $mod+s layout stacking
-
-#T
-# bind mod+shift+t to Turtl
-bindsym $mod+Shift+t exec /home/dan/apps/turtl/turtl
-
-#U
-# resize window
-bindsym $mod+u resize shrink height 10 px or 10 ppt
-#bind mod+shift+u to slack
-bindsym $mod+Shift+u exec slack
-
-#V
-# split in vertical orientation
-bindsym $mod+v split v
-
-#W
-#enable tabbed containers
-bindsym $mod+w layout tabbed
-
-#X
-
-#Y
-# resize window
-bindsym $mod+y resize shrink width 10 px or 10ppt
-
-#Z
-
-
+#just some color configuratons (defaults for now)
+# class                 border  backgr. text    indicator child_border
+client.focused          #5b7f06 #1a261a #ffffff #415b03   #5f8407
 
 
 
@@ -262,9 +124,11 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
-## load a particular program in a certain workspace
+# load a particular program in a certain workspace
+# run xprop in the terminal to find an application's class
 #assign [class="Firefox"] $workspace2
-#assign [class="Turtl"] $workspace1
+assign [class="Slack"] $workspace9
+assign [class="MPLAB X IDE v3.61"] $workspace8
 
 # move arround between workspaces
 bindsym $mod+bracketleft 	workspace prev
@@ -272,6 +136,263 @@ bindsym $mod+Shift+bracketleft 	workspace $workspace1
 bindsym $mod+bracketright 	workspace next
 bindsym $mod+Shift+bracketright workspace $workspace10
 
+
+###---BASIC BINDINGS---###
+
+#Return
+#start a terminal
+bindsym $mod+Return exec $term
+#start a terminal and launch ranger
+bindsym $mod+Shift+Return exec $term -e ranger
+
+#Space
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+#backslash(|)
+#start a terminal and attach to last tmux session 
+bindsym $mod+backslash exec $term -e tmux attach
+#start a terminal and attach to last tmux session 
+bindsym $mod+Shift+backslash exec $term -e tmux new-session
+	
+#Escape
+#stop and hide everything
+bindsym $mod+Escape exec $truemute ; workspace *; exec $term -e ranger
+#making mod+shift+Escape lock i3 
+bindsym $mod+shift+Escape  exec $truemute ; exec i3lock -c "000000"
+
+#BackSpace
+#bindsym $mod+BackSpace 
+# exit i3 (logs you out of your X session)
+bindsym $mod+BackSpace exec ~/.i3/exit_menu.sh 
+#bindsym $mod+Shift+BackSpace 
+bindsym $mod+Shift+BackSpace exec reboot
+
+
+#	NOT USED
+#delete
+#Print
+#Scroll_Lock
+#Insert
+#Pause
+#grave
+#bindsym $mod+grave 
+#aciitilde
+#bindsym $mod+aciitilde 
+#semicolon
+#apostrophe
+#slash(?)
+
+
+
+
+###---LETTER KEY BINDINGS---###
+# mod + key is responsible for i3 operation or some utility
+# mod + shift + key launches a partictular program usually
+
+#A
+#launch arandr
+bindsym $mod+Shift+a exec arandr
+
+#B
+# bind mod+b to redshift -o (oneshot redshift)
+bindsym $mod+b mode "redshift"
+# bind mod+shift+b to redshift -x (quit redshift)
+bindsym $mod+Shift+b exec redshift -x
+
+#C
+# focus the child container
+bindsym $mod+c focus child
+# focus the parent container
+bindsym $mod+Shift+c focus parent
+
+#D
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run -l 100
+# directory selsction mode
+bindsym $mod+Shift+d mode "directory"
+
+#E
+#enable normal/split containers
+bindsym $mod+e layout toggle split
+#launch jrnl
+bindsym $mod+Shift+e exec $term -e jrnl
+
+#F
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# file selsction mode
+bindsym $mod+Shift+f mode "file"
+
+#G
+# split in horizontal orientation
+bindsym $mod+g split h
+
+#H
+# change focus
+bindsym $mod+h focus left
+# move focused window
+bindsym $mod+Shift+h move left
+
+#I
+# resize window
+bindsym $mod+i resize grow height 10 px or 10 ppt
+# launch browser
+bindsym $mod+Shift+i exec $BROWSER
+
+#J
+# change focus
+bindsym $mod+j focus down
+# move focused window
+bindsym $mod+Shift+j move down
+
+#K
+# change focus
+bindsym $mod+k focus up
+# move focused window
+bindsym $mod+Shift+k move up
+
+#L
+# change focus
+bindsym $mod+l focus right
+# move focused window
+bindsym $mod+Shift+l move right
+
+#M
+#launch mplabx
+bindsym $mod+Shift+m exec mplab_ide
+
+#N
+# bind mod+shift+n to nautilis file browser
+bindsym $mod+shift+n exec nautilus
+
+#O
+# resize window
+bindsym $mod+o resize grow width 10 px or 10 ppt
+#launch octave command line
+bindsym $mod+Shift+o exec $term -e octave --no-gui -q
+
+#P
+#bind mod+p to scrot
+#bindsym $mod+p exec --no-startup-id scrot -u 'capture_%m_%d_%Y.png' -e 'mv $f ~/Pictures/screenshots'
+bindsym $mod+p exec --no-startup-id scrot 'capture_%m-%d-%Y_%I:%M:%S.png' -e 'mv $f ~/Pictures/screenshots'
+#bind mod+Shift+p to launch shutter
+bindsym $mod+Shift+p exec shutter
+
+
+#Q
+# kill focused window
+bindsym $mod+q kill
+
+#R
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+r restart
+
+#S
+# enable stacked containers
+bindsym $mod+s layout stacking
+bindsym $mod+Shift+s exec slack
+
+#T
+# bind mod+shift+t to list todo.txt
+bindsym $mod+Shift+t workspace $workspace1 ; exec $term -e vi ~/Dropbox/todo.md
+
+#U
+# resize window
+bindsym $mod+u resize shrink height 10 px or 10 ppt
+
+#V
+# split in vertical orientation
+bindsym $mod+v split v
+# open vim buffer
+bindsym $mod+Shift+v exec $term -e vim
+
+#W
+#enable tabbed containers
+bindsym $mod+w layout tabbed
+#enter "web" selection mode to open favorite websites quick
+bindsym $mod+Shift+w mode "web"
+
+#X
+bindsym $mod+x gaps inner current set 0; gaps outer current set 0
+
+#Y
+# resize window
+bindsym $mod+y resize shrink width 10 px or 10ppt
+bindsym $mod+Shift+y exec ~/bin/qutebrowser_wrapper.sh
+
+#Z
+# change gaps to a nice default
+bindsym $mod+z gaps inner current set 15; gaps outer current set 15
+
+
+
+
+
+# reshift mode - change tint and brightness
+mode "redshift"{
+        # change the temperature (redness)
+
+        bindsym 1 exec redshift -O 5300
+        bindsym 2 exec redshift -O 4900
+        bindsym 3 exec redshift -O 4900
+        bindsym 4 exec redshift -O 4500
+        bindsym 5 exec redshift -O 4100
+        bindsym 6 exec redshift -O 3700
+        bindsym 7 exec redshift -O 3300
+        bindsym 8 exec redshift -O 2900
+        bindsym 9 exec redshift -O 2500
+        bindsym 0 exec redshift -O 2100
+
+        #back to normal
+        bindsym Return mode "default"
+        bindsym Escape mode "default"   
+}
+
+# web selection mode
+mode "web"{
+        bindsym c exec $BROWSER link
+        bindsym m exec $BROWSER link
+        bindsym d exec $BROWSER link
+        bindsym f exec $BROWSER link
+        bindsym y exec $BROWSER link
+        bindsym o exec $BROWSER link
+        
+        #back to normal
+        bindsym Return mode "default"
+        bindsym Escape mode "default"   
+}
+
+#file/directory selection mode
+mode "directory"{
+    bindsym b exec $term -e ranger ~/Dropbox ; mode "default"
+    bindsym b exec $term -e ranger ~/code ; mode "default"
+    bindsym d exec $term -e ranger ~/Documents ; mode "default"
+    bindsym j exec $term -e ranger ~/job ; mode "default"
+
+        #back to normal
+        bindsym Return mode "default"
+        bindsym Escape mode "default"   
+}
+
+#file/directory selection mode
+mode "file"{
+        bindsym i exec $term -e vim ~/.config/i3/config ; mode "default"
+        bindsym p exec zathura ~/Documents/pok3r/pok3er_user_manual.pdf ; mode "default"
+        bindsym r exec $term -e sudo vim /etc/ranger/config/rc.conf ; mode "default"
+        bindsym v exec $term -e vim ~/.vimrc ; mode "default"
+        bindsym x exec $term -e vim ~/.tmux.conf ; mode "default"
+        bindsym z exec $term -e vim ~/.zshrc ; mode "default"
+        bindsym u exec $term -e vim ~/.Xresources ; mode "default"
+
+
+
+        #back to normal
+        bindsym Return mode "default"
+        bindsym Escape mode "default"   
+}
 
 ###---ARROW KEYS---###
 # change focus
@@ -325,11 +446,8 @@ bindsym $mod+Shift+Right move right
 # mute sound
  bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle 
 
-# # Sreen brightness controls -- DOESNT WORK
-# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-## # Touchpad controls
+## # Touchpad controls --> doesn't work :(
 # bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # # Media player controls
@@ -337,27 +455,6 @@ bindsym $mod+Shift+Right move right
  bindsym XF86AudioPause exec playerctl pause
  bindsym XF86AudioNext exec playerctl next
  bindsym XF86AudioPrev exec playerctl previous
-
-
-
-
-
-###---EXTERNAL MONITOR: MY LG+VGA---###
-
-#laptop on bottom
-#exec_always xrandr --output HDMI1 --off --output DP1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP1 --primary --mode 1366x768 --pos 272x1080 --rotate normal --output VIRTUAL1 --off
-
-#laptop on top
-#exec_always xrandr --output HDMI1 --off --output DP1 --mode 1920x1080 --pos 0x768 --rotate normal --output eDP1 --primary --mode 1366x768 --pos 240x0 --rotate normal --output VIRTUAL1 --off
-
-##laptop on left
-exec_always xrandr --output HDMI1 --off --output DP1 --mode 1920x1080 --pos 1366x0 --rotate normal --output eDP1 --primary --mode 1366x768 --pos 0x176 --rotate normal --output VIRTUAL1 --off
-
-#laptop on right
-#exec_always xrandr --output HDMI1 --off --output DP1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP1 --primary --mode 1366x768 --pos 1920x160 --rotate normal --output VIRTUAL1 --off
-
-
-
 
 ###---EXTRA XF86 KEYS---###
 #These are the extra media keys that some keyboards have.
